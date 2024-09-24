@@ -1,0 +1,28 @@
+ bool isButtonSelected = false;
+
+GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              // Toggle the selection state when tapped
+                              isButtonSelected = !isButtonSelected;
+                            });
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.blue),
+                              color: isButtonSelected
+                                  ? Colors.blue.shade100
+                                  : Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              isButtonSelected ? 'Selected' : 'Select',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),

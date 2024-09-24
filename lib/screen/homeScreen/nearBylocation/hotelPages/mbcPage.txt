@@ -1,0 +1,21 @@
+import 'package:flutter/material.dart';
+
+class mbcPage extends StatefulWidget {
+  const mbcPage({super.key});
+
+  @override
+  State<mbcPage> createState() => _mbcPage();
+}
+
+class _mbcPage extends State<mbcPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: Container(
+        height: 50,
+        width: double.infinity,
+        color: Colors.grey,
+      ),
+    );
+  }
+}

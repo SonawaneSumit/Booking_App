@@ -1,0 +1,83 @@
+// ignore_for_file: unused_import
+
+import 'package:booking_app/screen/Mytrip/myTrip.dart';
+import 'package:booking_app/screen/homeScreen/home.dart';
+import 'package:booking_app/screen/profileScreen/profileScreen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:booking_app/screen/Wishlist/wishlisht.dart';
+import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
+
+class dashboard extends StatefulWidget {
+  dashboard({super.key});
+
+  @override
+  State<dashboard> createState() => _dashboardState();
+}
+
+class _dashboardState extends State<dashboard> {
+  int _indexnumber = 0;
+
+  final List<Widget> _pages = [
+    Home(),
+    MyTrip(),
+    Wishlist(),
+    profileScreen(),
+  ];
+
+  void _ontapindex(int index) {
+    setState(() {
+      _indexnumber = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: IndexedStack(
+        index: _indexnumber,
+        children: _pages,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.blue.shade400,
+        backgroundColor: Colors.blue,
+        showUnselectedLabels: true,
+        currentIndex: _indexnumber,
+        onTap: (index) {
+          setState(() {
+            _indexnumber = index;
+          });
+        },
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              color: Colors.blue,
+            ),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.travel_explore,
+                color: Colors.green,
+              ),
+              label: 'MyTrip'),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.favorite,
+              color: Colors.red,
+            ),
+            label: 'Wishlist',
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.account_circle_outlined,
+                color: Colors.blueGrey,
+              ),
+              label: 'Profile'),
+        ],
+      ),
+    );
+  }
+}

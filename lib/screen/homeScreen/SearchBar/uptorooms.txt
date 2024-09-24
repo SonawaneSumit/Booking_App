@@ -1,0 +1,137 @@
+// uptoRooms
+// ignore_for_file: unused_import, unnecessary_import
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get_connect/connect.dart';
+import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+
+class uptoRooms extends StatefulWidget {
+  const uptoRooms({
+    super.key,
+  });
+
+  @override
+  State<uptoRooms> createState() => _uptoRoomsState();
+}
+
+class _uptoRoomsState extends State<uptoRooms> {
+  late String _startDate, _endDate;
+  final DateRangePickerController _controller = DateRangePickerController();
+
+  @override
+  void initState() {
+    final DateTime today = DateTime.now();
+    _startDate = DateFormat('dd, MMM, yyyy').format(today).toString();
+    _endDate = DateFormat('dd, MMM, yyyy')
+        .format(today.add(Duration(days: 3)))
+        .toString();
+    _controller.selectedRange =
+        PickerDateRange(today, today.add(Duration(days: 3)));
+    super.initState();
+  }
+
+  void selectionChanged(DateRangePickerSelectionChangedArgs args) {
+    setState(() {
+      _startDate =
+          DateFormat('dd, MMM, yyyy').format(args.value.startDate).toString();
+      _endDate = DateFormat('dd, MMM, yyyy')
+          .format(args.value.endDate ?? args.value.startDate)
+          .toString();
+    });
+  }
+
+  void openDatePicker() async {
+    final DateTimeRange? picked = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 2),
+    );
+
+    if (picked != null) {
+      setState(() {
+        _controller.selectedRange = PickerDateRange(
+          picked.start,
+          picked.end,
+        );
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 7, right: 7, top: 5),
+        child: Column(
+          children: [
+            TextFormField(
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                labelText: 'Find your desired stay',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 7,
+            ),
+            Container(
+              child: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          style: BorderStyle.solid, color: Colors.black45),
+                      color: Colors.transparent),
+                  width: 300,
+                  child: Row(
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: openDatePicker,
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(5, 15, 0, 0),
+                          height: 50,
+                          width: 123,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Text(
+                              'Check-in : ${DateFormat('dd, MMM, yyyy').format(_controller.selectedRange!.startDate!)}',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: openDatePicker,
+                        icon: Icon(Icons.calendar_month),
+                      ),
+                      GestureDetector(
+                        onTap: openDatePicker,
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                          height: 50,
+                          width: 120,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Text(
+                              'Check-Out : ${DateFormat('dd, MMM, yyyy').format(_controller.selectedRange!.endDate ?? _controller.selectedRange!.startDate!)}',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+
+      // Text('Hotel Selection Tab Content'),
+    );
+  }
+}

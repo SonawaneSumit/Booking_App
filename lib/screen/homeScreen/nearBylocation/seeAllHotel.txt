@@ -1,0 +1,70 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class allHotelList extends StatefulWidget {
+  const allHotelList({super.key});
+
+  @override
+  State<allHotelList> createState() => _allHotelList();
+}
+
+class _allHotelList extends State<allHotelList> {
+  // Color iconColor = Colors.white;
+
+  // Function to toggle the icon color
+  // void _toggleIconColor() {
+  //   setState(() {
+  //     // If the current color is black, change it to red, otherwise change it to black
+  //     iconColor = (iconColor == Colors.white) ? Colors.red : Colors.white;
+  //   });
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          // backgroundColor: Colors.transparent,
+          // shadowColor: Colors.transparent,
+
+          ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 9, right: 9),
+                  child: SearchBar(
+                    leading: Icon(Icons.search),
+                    trailing: [Icon(Icons.mic)],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Column(
+              children: [
+                courtyard(),
+                //
+                //
+                //    //      //  // /* Second Hotel */ //    //    //    //
+                //
+                //
+                SizedBox(
+                  height: 7,
+                ),
+                expressInn()
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

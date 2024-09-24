@@ -1,0 +1,21 @@
+import 'package:flutter/material.dart';
+
+class expressPage extends StatefulWidget {
+  const expressPage({super.key});
+
+  @override
+  State<expressPage> createState() => _expressPage();
+}
+
+class _expressPage extends State<expressPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: Container(
+        height: 50,
+        width: double.infinity,
+        color: Colors.grey,
+      ),
+    );
+  }
+}

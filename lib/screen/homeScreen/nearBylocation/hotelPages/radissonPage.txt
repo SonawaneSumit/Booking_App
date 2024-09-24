@@ -1,0 +1,21 @@
+import 'package:flutter/material.dart';
+
+class radissionPage extends StatefulWidget {
+  const radissionPage({super.key});
+
+  @override
+  State<radissionPage> createState() => _radissionPage();
+}
+
+class _radissionPage extends State<radissionPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: Container(
+        height: 50,
+        width: double.infinity,
+        color: Colors.grey,
+      ),
+    );
+  }
+}
